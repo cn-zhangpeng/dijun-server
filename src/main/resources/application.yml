@@ -1,0 +1,90 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /dijun
+
+spring:
+  application:
+    name: dijun-server
+  banner:
+    location: banner.txt
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://159.75.110.175:3306/dijun?useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: PENG.zhang.1995
+    # Hikari 连接池配置
+    # 最小空闲连接数量
+    hikari:
+      minimum-idle: 5
+      # 空闲连接存活最大时间，默认600000（10分钟）
+      idle-timeout: 180000
+      # 连接池最大连接数，默认是10
+      maximum-pool-size: 10
+      # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      auto-commit: true
+      # 连接池名称
+      pool-name: shjz
+      # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      max-lifetime: 1800000
+      # 数据库连接超时时间,默认30秒，即30000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  # liquibase 配置
+  liquibase:
+    enabled: true
+    #    check-change-log-location: true # 检测 log 文件是否存在
+    change-log: classpath:liquibase/master.xml # log 文件位置
+    drop-first: false # 是否删除数据库
+  # jackson
+  jackson:
+    time-zone: GMT+8
+  redis:
+    database: 0
+    host: 159.75.110.175
+    password: PENG.zhang.1995
+    lettuce:
+      pool:
+        max-wait: -1
+        min-idle: 10
+        max-idle: 50
+        max-active: 50
+    port: 6379
+  mvc:
+    pathmatch:
+      matching-strategy:  ant_path_matcher
+
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.zp95sky.dijun
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+    enable-document-manage: false
+    swagger-model-name: 实体类列表
+    enable-home-custom: true
+    home-custom-location: classpath:markdown/home.md
+    enable-footer-custom: true
+    footer-custom-content: Apache License 2.0
+
+id-worker:
+  worker-id: 1
+  data-center-id: 1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
