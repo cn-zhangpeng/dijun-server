@@ -6,6 +6,8 @@ server:
 spring:
   application:
     name: dijun-server
+  messages:
+    basename: i18n/messages
   banner:
     location: banner.txt
   datasource:
