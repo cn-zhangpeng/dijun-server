@@ -18,7 +18,7 @@ import java.util.List;
 
 @Api(tags = "项目管理")
 @RestController
-@RequestMapping("/project")
+@RequestMapping("/projects")
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))
 public class ProjectController {
 
