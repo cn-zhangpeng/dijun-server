@@ -21,6 +21,10 @@ public class ProjectTask {
     @TableId("id")
     private Long id;
 
+    /** 任务ID */
+    @TableField("kanban_id")
+    private Long kanbanId;
+
     /** 任务名称 */
     @TableField("name")
     private String name;

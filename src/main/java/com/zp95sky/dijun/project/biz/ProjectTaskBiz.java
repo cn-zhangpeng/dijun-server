@@ -1,5 +1,6 @@
 package com.zp95sky.dijun.project.biz;
 
+import com.zp95sky.dijun.common.response.BaseResponse;
 import com.zp95sky.dijun.project.domain.ProjectTaskListDo;
 
 import java.util.List;
@@ -12,8 +13,10 @@ public interface ProjectTaskBiz {
     /**
      * 查询任务列表
      * @param kanbanId 看板ID
-     * @return 任务列表
+     * @param page 当前页
+     * @param pageSize 查询条数
+     * @return 任务列表及分页信息
      */
-    List<ProjectTaskListDo> getTaskList(Long kanbanId);
+    BaseResponse<ProjectTaskListDo> getTaskList(Long kanbanId, Integer page, Integer pageSize);
 
 }

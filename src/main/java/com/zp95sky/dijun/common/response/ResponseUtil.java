@@ -2,6 +2,7 @@ package com.zp95sky.dijun.common.response;
 
 import com.zp95sky.dijun.common.enums.ResponseCodeEnum;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -20,6 +21,10 @@ public class ResponseUtil {
         result.setCode(response.getCode());
         result.setMsg(response.getMsg());
         return result;
+    }
+
+    public static <T> BaseResponse<T> buildPageResultEmpty(Integer page, Integer pageSize) {
+        return buildPageResultSuccess(page, pageSize, 0L, Collections.emptyList());
     }
 
     public static <T> BaseResponse<T> buildPageResultSuccess(Integer page, Integer pageSize, Long total, List<T> data) {
