@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,13 +38,21 @@ public class ProjectTaskBizImpl implements ProjectTaskBiz {
         }
 
         List<ProjectTaskListDo> taskListDos = taskList.stream().map(this::buildProjectTaskListDo).collect(Collectors.toList());
+        appendExecutorName(taskListDos);
         return ResponseUtil.buildPageResultSuccess(page, pageSize, taskPage.getTotal(), taskListDos);
     }
 
+    private void appendExecutorName(List<ProjectTaskListDo> taskListDos) {
+        Set<Long> ids = taskListDos.stream().map(t -> t.getExecutor().getId()).collect(Collectors.toSet());
+
+    }
+
     private ProjectTaskListDo buildProjectTaskListDo(ProjectTask projectTask) {
+        ProjectTaskListDo.TaskExecutor taskExecutor = ProjectTaskListDo.TaskExecutor.builder()
+                .id(projectTask.getExecutorId()).build();
         return ProjectTaskListDo.builder()
                 .id(projectTask.getId()).name(projectTask.getName())
-                .executorName(projectTask.getExecutorId()).endTime(projectTask.getEndTime())
+                .executor(taskExecutor).endTime(projectTask.getEndTime())
                 .build();
     }
 
