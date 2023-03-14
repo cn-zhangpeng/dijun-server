@@ -9,12 +9,15 @@ import com.zp95sky.dijun.project.biz.ProjectTaskBiz;
 import com.zp95sky.dijun.project.domain.ProjectTaskListDo;
 import com.zp95sky.dijun.project.entity.ProjectTask;
 import com.zp95sky.dijun.project.service.ProjectTaskService;
+import com.zp95sky.dijun.user.entity.User;
+import com.zp95sky.dijun.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,6 +26,7 @@ import java.util.stream.Collectors;
 public class ProjectTaskBizImpl implements ProjectTaskBiz {
 
     private final ProjectTaskService taskService;
+    private final UserService userService;
 
     @Override
     public BaseResponse<ProjectTaskListDo> getTaskList(Long kanbanId, Integer page, Integer pageSize) {
@@ -44,7 +48,9 @@ public class ProjectTaskBizImpl implements ProjectTaskBiz {
 
     private void appendExecutorName(List<ProjectTaskListDo> taskListDos) {
         Set<Long> ids = taskListDos.stream().map(t -> t.getExecutor().getId()).collect(Collectors.toSet());
-
+        List<User> userList = userService.listByIds(ids);
+        Map<Long, String> userMap = userList.stream().collect(Collectors.toMap(User::getId, User::getNickname));
+        taskListDos.forEach(t -> t.getExecutor().setName(userMap.get(t.getExecutor().getId())));
     }
 
     private ProjectTaskListDo buildProjectTaskListDo(ProjectTask projectTask) {
