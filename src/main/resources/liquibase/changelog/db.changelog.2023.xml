@@ -3,4 +3,86 @@
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
+    <changeSet id="202303181928" author="紫穹">
+        <comment>添加用户表、项目表、项目看板表、项目任务表</comment>
+
+        <createTable tableName="user" remarks="用户表">
+            <column name="id" type="bigint" remarks="ID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nickname" type="varchar(64)" defaultValue="" remarks="用户昵称">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mobile" type="varchar(16)" defaultValue="" remarks="手机号">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(128)" defaultValue="" remarks="密码">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="datetime" defaultValue="now()" remarks="创建时间">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="project" remarks="项目表">
+            <column name="id" type="bigint" remarks="ID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(64)" defaultValue="" remarks="项目名称">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cover_image" type="varchar(32)" defaultValue="" remarks="封面图片">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(255)" defaultValue="" remarks="项目描述">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="datetime" defaultValue="now()" remarks="创建时间">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="project_kanban" remarks="项目看板表">
+            <column name="id" type="bigint" remarks="ID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="project_id" type="bigint" remarks="项目ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(32)" defaultValue="" remarks="看板名称">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ordered" type="int" defaultValue="0" remarks="看板顺序">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="datetime" defaultValue="now()" remarks="创建时间">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="project_task" remarks="项目任务表">
+            <column name="id" type="bigint" remarks="ID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="kanban_id" type="bigint" remarks="看板ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(64)" defaultValue="" remarks="任务名称">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_time" type="datetime" remarks="任务开始时间" />
+            <column name="end_time" type="datetime" remarks="任务结束时间" />
+            <column name="priority" type="varchar(16)" defaultValue="LOWER" remarks="任务优先级">
+                <constraints nullable="false"/>
+            </column>
+            <column name="executor_id" type="bigint" remarks="执行者ID" />
+            <column name="creator_id" type="bigint" remarks="创建者ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="datetime" defaultValue="now()" remarks="创建时间">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>

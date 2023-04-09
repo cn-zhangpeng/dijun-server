@@ -36,7 +36,6 @@ spring:
   # liquibase 配置
   liquibase:
     enabled: true
-    #    check-change-log-location: true # 检测 log 文件是否存在
     change-log: classpath:liquibase/master.xml # log 文件位置
     drop-first: false # 是否删除数据库
   # jackson
