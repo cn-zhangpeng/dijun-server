@@ -25,7 +25,7 @@ public class ProjectKanbanController {
     @ApiOperation("查询看板列表")
     @ApiImplicitParam(name = "pid", value = "项目ID", paramType = "path", dataTypeClass = String.class)
     @GetMapping("/projects/{pid}/kanbans")
-    public BaseResponse<List<ProjectKanbanListDo>> getKanbanList(@PathVariable("pid") Long projectId) {
+    public BaseResponse<List<ProjectKanbanListDo>> getKanbanList(@PathVariable("pid") Integer projectId) {
         List<ProjectKanbanListDo> kanbanListDos = kanbanBiz.getKanbanList(projectId);
         return ResponseUtil.buildResultSuccess(kanbanListDos);
     }

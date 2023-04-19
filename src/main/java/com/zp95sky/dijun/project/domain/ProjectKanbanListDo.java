@@ -1,7 +1,5 @@
 package com.zp95sky.dijun.project.domain;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -13,8 +11,7 @@ import lombok.Data;
 public class ProjectKanbanListDo {
 
     @ApiModelProperty(value = "看板ID", required = true)
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "看板名称", required = true)
     private String name;

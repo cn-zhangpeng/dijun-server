@@ -23,12 +23,12 @@ public class ProjectTaskController {
 
     @ApiOperation("查询看板列表")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "kid", value = "看板ID", paramType = "path", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "kid", value = "看板ID", paramType = "path", dataTypeClass = Integer.class),
             @ApiImplicitParam(name = "page", value = "当前页", paramType = "query", dataTypeClass = Integer.class),
             @ApiImplicitParam(name = "pageSize", value = "查询条数", paramType = "query", dataTypeClass = Integer.class)
     })
     @GetMapping("/kanbans/{kid}/tasks")
-    public BaseResponse<ProjectTaskListDo> getTaskList(@PathVariable("kid") Long kanbanId,
+    public BaseResponse<ProjectTaskListDo> getTaskList(@PathVariable("kid") Integer kanbanId,
                                                              @RequestParam Integer page,
                                                              @RequestParam Integer pageSize) {
         return taskBiz.getTaskList(kanbanId, page, pageSize);

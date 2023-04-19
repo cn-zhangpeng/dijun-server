@@ -1,5 +1,6 @@
 package com.zp95sky.dijun.project.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -18,12 +19,12 @@ import java.time.LocalDateTime;
 public class ProjectTask {
 
     /** 任务ID */
-    @TableId("id")
-    private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     /** 任务ID */
     @TableField("kanban_id")
-    private Long kanbanId;
+    private Integer kanbanId;
 
     /** 任务名称 */
     @TableField("name")
@@ -43,11 +44,11 @@ public class ProjectTask {
 
     /** 执行者 */
     @TableField("executor_id")
-    private Long executorId;
+    private Integer executorId;
 
     /** 创建者 */
     @TableField("creator_id")
-    private Long creatorId;
+    private Integer creatorId;
 
     /** 创建时间 */
     @TableField("create_time")

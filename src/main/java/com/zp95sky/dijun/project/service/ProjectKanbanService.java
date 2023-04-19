@@ -15,6 +15,6 @@ public interface ProjectKanbanService extends IService<ProjectKanban> {
      * @param projectId 项目ID
      * @return 看板列表
      */
-    List<ProjectKanban> listByProjectId(Long projectId);
+    List<ProjectKanban> listByProjectId(Integer projectId);
 
 }

@@ -1,5 +1,6 @@
 package com.zp95sky.dijun.user.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -17,8 +18,8 @@ import java.time.LocalDateTime;
 public class User {
 
     /** 用户ID */
-    @TableId("id")
-    private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     /** 用户昵称 */
     @TableField("nickname")

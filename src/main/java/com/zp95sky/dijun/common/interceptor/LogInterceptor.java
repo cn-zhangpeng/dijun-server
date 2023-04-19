@@ -24,7 +24,7 @@ public class LogInterceptor implements HandlerInterceptor {
     @Resource
     private final Snowflake snowflake;
 
-    private final static String TRACE_ID = "traceId";
+    private static final String TRACE_ID = "traceId";
 
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) {

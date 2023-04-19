@@ -34,7 +34,7 @@ public class ProjectController {
     @ApiOperation("删除项目")
     @ApiImplicitParam(name = "id", value = "项目ID", required = true, paramType = "path", dataTypeClass = String.class)
     @DeleteMapping("/{id}")
-    public BaseResponse<Void> deleteProject(@PathVariable Long id) {
+    public BaseResponse<Void> deleteProject(@PathVariable Integer id) {
         projectBiz.deleteProject(id);
         return ResponseUtil.buildResultSuccess();
     }
@@ -42,7 +42,7 @@ public class ProjectController {
     @ApiOperation("编辑项目")
     @ApiImplicitParam(name = "id", value = "项目ID", required = true, paramType = "path", dataTypeClass = String.class)
     @PutMapping("/{id}")
-    public BaseResponse<Void> editProject(@PathVariable Long id, @RequestBody EditProjectDto projectDto) {
+    public BaseResponse<Void> editProject(@PathVariable Integer id, @RequestBody EditProjectDto projectDto) {
         projectBiz.editProject(id, projectDto);
         return ResponseUtil.buildResultSuccess();
     }
@@ -57,7 +57,7 @@ public class ProjectController {
     @ApiOperation("查询项目信息")
     @ApiImplicitParam(name = "id", value = "项目ID", required = true, paramType = "path", dataTypeClass = String.class)
     @GetMapping("/{id}")
-    public BaseResponse<ProjectDo> getProjectInfo(@PathVariable Long id) {
+    public BaseResponse<ProjectDo> getProjectInfo(@PathVariable Integer id) {
         ProjectDo projectDo = projectBiz.getProjectInfo(id);
         return ResponseUtil.buildResultSuccess(projectDo);
     }

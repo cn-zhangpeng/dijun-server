@@ -29,7 +29,7 @@ public class ProjectTaskBizImpl implements ProjectTaskBiz {
     private final UserService userService;
 
     @Override
-    public BaseResponse<ProjectTaskListDo> getTaskList(Long kanbanId, Integer page, Integer pageSize) {
+    public BaseResponse<ProjectTaskListDo> getTaskList(Integer kanbanId, Integer page, Integer pageSize) {
         Page<ProjectTask> pageParam = new Page<>(page, pageSize);
         LambdaQueryWrapper<ProjectTask> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(ProjectTask::getKanbanId, kanbanId);
@@ -47,9 +47,9 @@ public class ProjectTaskBizImpl implements ProjectTaskBiz {
     }
 
     private void appendExecutorName(List<ProjectTaskListDo> taskListDos) {
-        Set<Long> ids = taskListDos.stream().map(t -> t.getExecutor().getId()).collect(Collectors.toSet());
+        Set<Integer> ids = taskListDos.stream().map(t -> t.getExecutor().getId()).collect(Collectors.toSet());
         List<User> userList = userService.listByIds(ids);
-        Map<Long, String> userMap = userList.stream().collect(Collectors.toMap(User::getId, User::getNickname));
+        Map<Integer, String> userMap = userList.stream().collect(Collectors.toMap(User::getId, User::getNickname));
         taskListDos.forEach(t -> t.getExecutor().setName(userMap.get(t.getExecutor().getId())));
     }
 

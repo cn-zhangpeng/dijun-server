@@ -22,14 +22,14 @@ public interface ProjectBiz {
      * 删除项目
      * @param id 项目ID
      */
-    void deleteProject(Long id);
+    void deleteProject(Integer id);
 
     /**
      * 编辑项目
      * @param id 项目ID
      * @param projectDto 项目信息
      */
-    void editProject(Long id, EditProjectDto projectDto);
+    void editProject(Integer id, EditProjectDto projectDto);
 
     /**
      * 查询所有项目列表
@@ -42,6 +42,6 @@ public interface ProjectBiz {
      * @param id 项目ID
      * @return 项目信息
      */
-    ProjectDo getProjectInfo(Long id);
+    ProjectDo getProjectInfo(Integer id);
 
 }

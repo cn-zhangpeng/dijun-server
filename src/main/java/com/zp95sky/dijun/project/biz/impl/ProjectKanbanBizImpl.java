@@ -20,7 +20,7 @@ public class ProjectKanbanBizImpl implements ProjectKanbanBiz {
     private final ProjectKanbanService kanbanService;
 
     @Override
-    public List<ProjectKanbanListDo> getKanbanList(Long projectId) {
+    public List<ProjectKanbanListDo> getKanbanList(Integer projectId) {
         List<ProjectKanban> kanbanList = kanbanService.listByProjectId(projectId);
         if (CollectionUtils.isEmpty(kanbanList)) {
             return Collections.emptyList();

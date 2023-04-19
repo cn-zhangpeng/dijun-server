@@ -13,7 +13,7 @@ import java.util.List;
 public class ProjectKanbanServiceImpl extends ServiceImpl<ProjectKanbanMapper, ProjectKanban> implements ProjectKanbanService {
 
     @Override
-    public List<ProjectKanban> listByProjectId(Long projectId) {
+    public List<ProjectKanban> listByProjectId(Integer projectId) {
         LambdaQueryWrapper<ProjectKanban> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(ProjectKanban::getProjectId, projectId);
         return list(queryWrapper);

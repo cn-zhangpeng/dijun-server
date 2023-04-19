@@ -1,5 +1,6 @@
 package com.zp95sky.dijun.project.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -17,12 +18,12 @@ import java.time.LocalDateTime;
 public class ProjectKanban {
 
     /** 项目ID */
-    @TableId("id")
-    private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     /** 项目ID */
     @TableField("project_id")
-    private Long projectId;
+    private Integer projectId;
 
     /** 看板名称 */
     @TableField("name")

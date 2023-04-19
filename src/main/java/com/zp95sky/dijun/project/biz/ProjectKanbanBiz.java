@@ -14,6 +14,6 @@ public interface ProjectKanbanBiz {
      * @param projectId 项目ID
      * @return 看板列表
      */
-    List<ProjectKanbanListDo> getKanbanList(Long projectId);
+    List<ProjectKanbanListDo> getKanbanList(Integer projectId);
 
 }

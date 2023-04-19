@@ -17,6 +17,6 @@ public interface ProjectTaskBiz {
      * @param pageSize 查询条数
      * @return 任务列表及分页信息
      */
-    BaseResponse<ProjectTaskListDo> getTaskList(Long kanbanId, Integer page, Integer pageSize);
+    BaseResponse<ProjectTaskListDo> getTaskList(Integer kanbanId, Integer page, Integer pageSize);
 
 }

@@ -1,6 +1,5 @@
 package com.zp95sky.dijun.project.biz.impl;
 
-import cn.hutool.core.lang.Snowflake;
 import com.zp95sky.dijun.common.constant.ResponseConstant;
 import com.zp95sky.dijun.project.biz.ProjectBiz;
 import com.zp95sky.dijun.project.domain.ProjectDo;
@@ -26,12 +25,10 @@ public class ProjectBizImpl implements ProjectBiz {
 
     private final ProjectService projectService;
 
-    private final Snowflake snowflake;
-
     @Override
     public void addProject(AddProjectDto projectDto) {
         Project project = Project.builder()
-                .id(snowflake.nextId()).name(projectDto.getName())
+                .name(projectDto.getName())
                 .coverImage(projectDto.getCoverImage()).description(projectDto.getDescription())
                 .createTime(LocalDateTime.now())
                 .build();
@@ -39,12 +36,12 @@ public class ProjectBizImpl implements ProjectBiz {
     }
 
     @Override
-    public void deleteProject(Long id) {
+    public void deleteProject(Integer id) {
         projectService.removeById(id);
     }
 
     @Override
-    public void editProject(Long id, EditProjectDto projectDto) {
+    public void editProject(Integer id, EditProjectDto projectDto) {
         Project project = Project.builder()
                 .id(id).name(projectDto.getName())
                 .coverImage(projectDto.getCoverImage()).description(projectDto.getDescription())
@@ -63,7 +60,7 @@ public class ProjectBizImpl implements ProjectBiz {
     }
 
     @Override
-    public ProjectDo getProjectInfo(Long id) {
+    public ProjectDo getProjectInfo(Integer id) {
         Project project = projectService.getById(id);
         Assert.notNull(project, ResponseConstant.ERROR_PROJECT_NOT_EXIST);
 
