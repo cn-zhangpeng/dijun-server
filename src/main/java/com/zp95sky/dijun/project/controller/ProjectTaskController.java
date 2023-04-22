@@ -1,6 +1,6 @@
 package com.zp95sky.dijun.project.controller;
 
-import com.zp95sky.dijun.common.response.BaseResponse;
+import com.zp95sky.dijun.common.response.BasePageData;
 import com.zp95sky.dijun.project.biz.ProjectTaskBiz;
 import com.zp95sky.dijun.project.domain.ProjectTaskListDo;
 import io.swagger.annotations.Api;
@@ -28,9 +28,9 @@ public class ProjectTaskController {
             @ApiImplicitParam(name = "pageSize", value = "查询条数", paramType = "query", dataTypeClass = Integer.class)
     })
     @GetMapping("/kanbans/{kid}/tasks")
-    public BaseResponse<ProjectTaskListDo> getTaskList(@PathVariable("kid") Integer kanbanId,
-                                                             @RequestParam Integer page,
-                                                             @RequestParam Integer pageSize) {
+    public BasePageData<ProjectTaskListDo> getTaskList(@PathVariable("kid") Integer kanbanId,
+                                                       @RequestParam Integer page,
+                                                       @RequestParam Integer pageSize) {
         return taskBiz.getTaskList(kanbanId, page, pageSize);
     }
 

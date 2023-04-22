@@ -29,6 +29,10 @@ public class User {
     @TableField("mobile")
     private String mobile;
 
+    /** 邮件 */
+    @TableField("email")
+    private String email;
+
     /** 密码 */
     @TableField("password")
     private String password;

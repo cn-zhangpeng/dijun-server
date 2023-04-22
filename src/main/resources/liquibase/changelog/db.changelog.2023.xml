@@ -85,4 +85,14 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="202304222040" author="紫穹">
+        <comment>用户表添加邮件字段</comment>
+
+        <addColumn tableName="user">
+            <column name="email" type="varchar(64)" defaultValue="" remarks="邮件" afterColumn="mobile">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

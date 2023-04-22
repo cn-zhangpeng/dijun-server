@@ -1,6 +1,7 @@
 package com.zp95sky.dijun.project.biz.impl;
 
-import com.zp95sky.dijun.common.constant.ResponseConstant;
+import com.zp95sky.dijun.common.constant.ErrorConstant;
+import com.zp95sky.dijun.common.utils.AssertUtil;
 import com.zp95sky.dijun.project.biz.ProjectBiz;
 import com.zp95sky.dijun.project.domain.ProjectDo;
 import com.zp95sky.dijun.project.domain.ProjectListDo;
@@ -9,9 +10,9 @@ import com.zp95sky.dijun.project.dto.EditProjectDto;
 import com.zp95sky.dijun.project.entity.Project;
 import com.zp95sky.dijun.project.service.ProjectService;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
@@ -59,10 +60,11 @@ public class ProjectBizImpl implements ProjectBiz {
         return projectList.stream().map(this::buildProjectListDo).collect(Collectors.toList());
     }
 
+    @SneakyThrows
     @Override
     public ProjectDo getProjectInfo(Integer id) {
         Project project = projectService.getById(id);
-        Assert.notNull(project, ResponseConstant.ERROR_PROJECT_NOT_EXIST);
+        AssertUtil.notEmpty(project, ErrorConstant.PROJECT_NOT_EXIST);
 
         return buildProjectDo(project);
     }

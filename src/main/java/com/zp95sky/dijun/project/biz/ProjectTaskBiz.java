@@ -1,9 +1,7 @@
 package com.zp95sky.dijun.project.biz;
 
-import com.zp95sky.dijun.common.response.BaseResponse;
+import com.zp95sky.dijun.common.response.BasePageData;
 import com.zp95sky.dijun.project.domain.ProjectTaskListDo;
-
-import java.util.List;
 
 /**
  * 项目任务业务处理
@@ -17,6 +15,6 @@ public interface ProjectTaskBiz {
      * @param pageSize 查询条数
      * @return 任务列表及分页信息
      */
-    BaseResponse<ProjectTaskListDo> getTaskList(Integer kanbanId, Integer page, Integer pageSize);
+    BasePageData<ProjectTaskListDo> getTaskList(Integer kanbanId, Integer page, Integer pageSize);
 
 }

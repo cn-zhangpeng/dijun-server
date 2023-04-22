@@ -1,5 +1,7 @@
 package com.zp95sky.dijun.common.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 
@@ -13,23 +15,29 @@ import java.util.concurrent.TimeUnit;
 public class RedisUtil {
 
     private final RedisTemplate<String, Object> redisTemplate;
+    private final ObjectMapper objectMapper;
 
-    public RedisUtil(RedisTemplate<String, Object> redisTemplate) {
+    public RedisUtil(RedisTemplate<String, Object> redisTemplate, ObjectMapper objectMapper) {
         this.redisTemplate = redisTemplate;
+        this.objectMapper = objectMapper;
     }
 
     /**
      * 设置键值
      */
+    @SneakyThrows
     public <T> void set(String key, T value) {
-        redisTemplate.opsForValue().set(key, value);
+        String valueStr = objectMapper.writeValueAsString(value);
+        redisTemplate.opsForValue().set(key, valueStr);
     }
 
     /**
      * 设置键值并设置有效时间
      */
+    @SneakyThrows
     public <T> void set(String key, T value, long timeout, TimeUnit timeUnit) {
-        redisTemplate.opsForValue().set(key, value, timeout, timeUnit);
+        String valueStr = objectMapper.writeValueAsString(value);
+        redisTemplate.opsForValue().set(key, valueStr, timeout, timeUnit);
     }
 
     /**

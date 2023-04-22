@@ -3,8 +3,7 @@ package com.zp95sky.dijun.project.biz.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zp95sky.dijun.common.response.BaseResponse;
-import com.zp95sky.dijun.common.response.ResponseUtil;
+import com.zp95sky.dijun.common.response.BasePageData;
 import com.zp95sky.dijun.project.biz.ProjectTaskBiz;
 import com.zp95sky.dijun.project.domain.ProjectTaskListDo;
 import com.zp95sky.dijun.project.entity.ProjectTask;
@@ -29,7 +28,7 @@ public class ProjectTaskBizImpl implements ProjectTaskBiz {
     private final UserService userService;
 
     @Override
-    public BaseResponse<ProjectTaskListDo> getTaskList(Integer kanbanId, Integer page, Integer pageSize) {
+    public BasePageData<ProjectTaskListDo> getTaskList(Integer kanbanId, Integer page, Integer pageSize) {
         Page<ProjectTask> pageParam = new Page<>(page, pageSize);
         LambdaQueryWrapper<ProjectTask> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(ProjectTask::getKanbanId, kanbanId);
@@ -38,12 +37,12 @@ public class ProjectTaskBizImpl implements ProjectTaskBiz {
         List<ProjectTask> taskList = taskPage.getRecords();
 
         if (CollectionUtils.isEmpty(taskList)) {
-            return ResponseUtil.buildPageResultEmpty(page, pageSize);
+            return BasePageData.buildEmptyData();
         }
 
         List<ProjectTaskListDo> taskListDos = taskList.stream().map(this::buildProjectTaskListDo).collect(Collectors.toList());
         appendExecutorName(taskListDos);
-        return ResponseUtil.buildPageResultSuccess(page, pageSize, taskPage.getTotal(), taskListDos);
+        return BasePageData.buildData(page, pageSize, taskPage.getTotal(), taskListDos);
     }
 
     private void appendExecutorName(List<ProjectTaskListDo> taskListDos) {

@@ -6,6 +6,12 @@ server:
 spring:
   application:
     name: dijun-server
+  jackson:
+    time-zone: Asia/Shanghai
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    modules:
+      - com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
   messages:
     basename: i18n/messages
   banner:
@@ -40,10 +46,8 @@ spring:
     enabled: true
     change-log: classpath:liquibase/master.xml # log 文件位置
     drop-first: false # 是否删除数据库
-  # jackson
-  jackson:
-    time-zone: GMT+8
   redis:
+    serializer: jackson
     database: 0
     host: 127.0.0.1
     password: 123456
@@ -91,3 +95,7 @@ management:
     web:
       exposure:
         include: '*'
+
+service:
+  login:
+    black-list: '/login,/logout'

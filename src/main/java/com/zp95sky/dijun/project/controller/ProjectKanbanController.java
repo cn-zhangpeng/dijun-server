@@ -1,7 +1,5 @@
 package com.zp95sky.dijun.project.controller;
 
-import com.zp95sky.dijun.common.response.BaseResponse;
-import com.zp95sky.dijun.common.response.ResponseUtil;
 import com.zp95sky.dijun.project.biz.ProjectKanbanBiz;
 import com.zp95sky.dijun.project.domain.ProjectKanbanListDo;
 import io.swagger.annotations.Api;
@@ -25,9 +23,8 @@ public class ProjectKanbanController {
     @ApiOperation("查询看板列表")
     @ApiImplicitParam(name = "pid", value = "项目ID", paramType = "path", dataTypeClass = String.class)
     @GetMapping("/projects/{pid}/kanbans")
-    public BaseResponse<List<ProjectKanbanListDo>> getKanbanList(@PathVariable("pid") Integer projectId) {
-        List<ProjectKanbanListDo> kanbanListDos = kanbanBiz.getKanbanList(projectId);
-        return ResponseUtil.buildResultSuccess(kanbanListDos);
+    public List<ProjectKanbanListDo> getKanbanList(@PathVariable("pid") Integer projectId) {
+        return kanbanBiz.getKanbanList(projectId);
     }
 
 }
