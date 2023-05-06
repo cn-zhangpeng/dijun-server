@@ -14,5 +14,5 @@ public interface UserService extends IService<User> {
      * @return 用户信息
      */
     User getByEmail(String email);
-    
+
 }

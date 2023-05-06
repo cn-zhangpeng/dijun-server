@@ -98,4 +98,4 @@ management:
 
 service:
   login:
-    black-list: '/login,/logout'
+    white-list: '/login,/logout'

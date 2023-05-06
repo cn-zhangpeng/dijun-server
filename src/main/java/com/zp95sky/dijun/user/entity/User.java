@@ -29,7 +29,7 @@ public class User {
     @TableField("mobile")
     private String mobile;
 
-    /** 邮件 */
+    /** 邮箱 */
     @TableField("email")
     private String email;
 

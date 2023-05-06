@@ -32,8 +32,8 @@ public class LogInterceptor implements HandlerInterceptor {
     @Value("${server.servlet.context-path}")
     private String contextPath;
 
-    @Value("${service.login.black-list}")
-    private List<String> blackList;
+    @Value("${service.login.white-list}")
+    private List<String> whiteList;
 
     private static final String TRACE_ID = "traceId";
     private static final String TOKEN_HEADER_NAME = "Authorization";
@@ -46,7 +46,7 @@ public class LogInterceptor implements HandlerInterceptor {
 
         // 白名单中，直接放行
         String requestUri = request.getRequestURI().replace(contextPath, "");
-        if (blackList.contains(requestUri)) {
+        if (whiteList.contains(requestUri)) {
             return true;
         }
 
