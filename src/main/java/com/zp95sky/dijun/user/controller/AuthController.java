@@ -30,4 +30,10 @@ public class AuthController {
         return authBiz.login(loginDto);
     }
 
+    @ApiOperation("退出登录")
+    @PostMapping("/logout")
+    public void logout() {
+        authBiz.logout();
+    }
+
 }

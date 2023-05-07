@@ -21,6 +21,10 @@ public class Project {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    /** 企业ID */
+    @TableField("company_id")
+    private Integer companyId;
+
     /** 项目名称 */
     @TableField("name")
     private String name;

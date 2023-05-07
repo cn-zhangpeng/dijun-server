@@ -9,6 +9,8 @@ import com.zp95sky.dijun.project.dto.AddProjectDto;
 import com.zp95sky.dijun.project.dto.EditProjectDto;
 import com.zp95sky.dijun.project.entity.Project;
 import com.zp95sky.dijun.project.service.ProjectService;
+import com.zp95sky.dijun.user.biz.AuthBiz;
+import com.zp95sky.dijun.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +26,16 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))
 public class ProjectBizImpl implements ProjectBiz {
 
+    private final AuthBiz authBiz;
+
     private final ProjectService projectService;
 
     @Override
     public void addProject(AddProjectDto projectDto) {
+        User user = authBiz.getCurUser();
+
         Project project = Project.builder()
-                .name(projectDto.getName())
+                .companyId(user.getCompanyId()).name(projectDto.getName())
                 .coverImage(projectDto.getCoverImage()).description(projectDto.getDescription())
                 .createTime(LocalDateTime.now())
                 .build();

@@ -95,4 +95,54 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="202305072215" author="紫穹">
+        <comment>添加企业、部门表，用户表添加企业ID、部门ID字段</comment>
+
+        <createTable tableName="company" remarks="企业表">
+            <column name="id" type="int" remarks="ID" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(32)" defaultValue="" remarks="企业名称">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="datetime" defaultValue="now()" remarks="创建时间">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="department" remarks="部门表">
+            <column name="id" type="int" remarks="ID" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="company_id" type="int" remarks="企业ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(32)" defaultValue="" remarks="部门名称">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="datetime" defaultValue="now()" remarks="创建时间">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addColumn tableName="user">
+            <column name="company_id" type="int" defaultValue="-1" remarks="企业ID" afterColumn="password">
+                <constraints nullable="false"/>
+            </column>
+            <column name="department_id" type="int" defaultValue="-1" remarks="部门ID" afterColumn="company_id">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="202305072224" author="紫穹">
+        <comment>项目表添加企业ID字段</comment>
+
+        <addColumn tableName="project">
+            <column name="company_id" type="int" defaultValue="-1" remarks="企业ID" afterColumn="id">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

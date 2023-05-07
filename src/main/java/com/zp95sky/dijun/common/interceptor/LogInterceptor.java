@@ -1,6 +1,7 @@
 package com.zp95sky.dijun.common.interceptor;
 
 import cn.hutool.core.lang.Snowflake;
+import com.zp95sky.dijun.common.constant.CommonConstant;
 import com.zp95sky.dijun.common.constant.ErrorConstant;
 import com.zp95sky.dijun.common.utils.AssertUtil;
 import com.zp95sky.dijun.common.utils.RedisUtil;
@@ -35,10 +36,6 @@ public class LogInterceptor implements HandlerInterceptor {
     @Value("${service.login.white-list}")
     private List<String> whiteList;
 
-    private static final String TRACE_ID = "traceId";
-    private static final String TOKEN_HEADER_NAME = "Authorization";
-    private static final String TOKEN_PRE = "Bearer ";
-
     @SneakyThrows
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) {
@@ -62,16 +59,16 @@ public class LogInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler, Exception ex) {
-        ThreadContext. remove(TRACE_ID);
+        ThreadContext. remove(CommonConstant.TRACE_ID);
     }
 
     @SneakyThrows
     private void tokenCheck(HttpServletRequest request) {
-        String token = request.getHeader(TOKEN_HEADER_NAME);
+        String token = request.getHeader(CommonConstant.TOKEN_HEADER_NAME);
         AssertUtil.notEmpty(token, ErrorConstant.COMMON_TOKEN_INVALID);
-        AssertUtil.isTrue(token.startsWith(TOKEN_PRE), ErrorConstant.COMMON_TOKEN_INVALID);
+        AssertUtil.isTrue(token.startsWith(CommonConstant.TOKEN_PRE), ErrorConstant.COMMON_TOKEN_INVALID);
 
-        String realToken = token.replace(TOKEN_PRE, "");
+        String realToken = token.replace(CommonConstant.TOKEN_PRE, CommonConstant.EMPTY_STRING);
         AssertUtil.notEmpty(realToken, ErrorConstant.COMMON_TOKEN_INVALID);
 
         AssertUtil.isTrue(redisUtil.exists(realToken), ErrorConstant.COMMON_TOKEN_INVALID);
