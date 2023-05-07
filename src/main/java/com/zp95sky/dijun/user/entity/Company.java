@@ -10,40 +10,20 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- * 用户实体
+ * 企业实体
  */
 @Data
 @Builder
-@TableName("user")
-public class User {
+@TableName("company")
+public class Company {
 
     /** 用户ID */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    /** 用户昵称 */
-    @TableField("nickname")
-    private String nickname;
-
-    /** 手机号 */
-    @TableField("mobile")
-    private String mobile;
-
-    /** 邮箱 */
-    @TableField("email")
-    private String email;
-
-    /** 密码 */
-    @TableField("password")
-    private String password;
-
-    /** 企业ID */
-    @TableField("company_id")
-    private Integer companyId;
-
-    /** 部门ID */
-    @TableField("department_id")
-    private Integer departmentId;
+    /** 企业名称 */
+    @TableField("name")
+    private String name;
 
     /** 创建时间 */
     @TableField("create_time")
