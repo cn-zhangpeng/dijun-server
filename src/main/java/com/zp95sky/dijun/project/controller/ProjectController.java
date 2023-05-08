@@ -24,8 +24,8 @@ public class ProjectController {
 
     @ApiOperation("添加项目")
     @PostMapping
-    public void addProject(@RequestBody AddProjectDto projectDto) {
-        projectBiz.addProject(projectDto);
+    public Integer addProject(@RequestBody AddProjectDto projectDto) {
+        return projectBiz.addProject(projectDto);
     }
 
     @ApiOperation("删除项目")

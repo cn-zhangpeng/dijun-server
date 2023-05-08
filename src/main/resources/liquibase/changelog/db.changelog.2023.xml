@@ -145,4 +145,9 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="202305081359" author="紫穹">
+        <comment>项目表封面图片字段长度修改为128</comment>
+        <modifyDataType tableName="project" columnName="cover_image" newDataType="varchar(128)" />
+    </changeSet>
+
 </databaseChangeLog>

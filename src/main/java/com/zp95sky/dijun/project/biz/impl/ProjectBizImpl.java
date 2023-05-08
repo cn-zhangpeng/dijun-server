@@ -31,7 +31,7 @@ public class ProjectBizImpl implements ProjectBiz {
     private final ProjectService projectService;
 
     @Override
-    public void addProject(AddProjectDto projectDto) {
+    public Integer addProject(AddProjectDto projectDto) {
         User user = authBiz.getCurUser();
 
         Project project = Project.builder()
@@ -40,6 +40,7 @@ public class ProjectBizImpl implements ProjectBiz {
                 .createTime(LocalDateTime.now())
                 .build();
         projectService.save(project);
+        return project.getId();
     }
 
     @Override

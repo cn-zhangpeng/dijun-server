@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api(tags = "用户管理")
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))
 public class UserController {
 

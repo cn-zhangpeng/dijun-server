@@ -15,8 +15,9 @@ public interface ProjectBiz {
     /**
      * 添加项目
      * @param projectDto 项目信息
+     * @return 项目ID
      */
-    void addProject(AddProjectDto projectDto);
+    Integer addProject(AddProjectDto projectDto);
 
     /**
      * 删除项目
