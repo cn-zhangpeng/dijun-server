@@ -37,6 +37,10 @@ public class User {
     @TableField("password")
     private String password;
 
+    /** 用户头像 */
+    @TableField("avatar")
+    private String avatar;
+
     /** 企业ID */
     @TableField("company_id")
     private Integer companyId;

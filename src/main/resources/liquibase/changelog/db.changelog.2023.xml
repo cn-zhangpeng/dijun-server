@@ -87,7 +87,6 @@
 
     <changeSet id="202304222040" author="紫穹">
         <comment>用户表添加邮件字段</comment>
-
         <addColumn tableName="user">
             <column name="email" type="varchar(64)" defaultValue="" remarks="邮件" afterColumn="mobile">
                 <constraints nullable="false"/>
@@ -137,7 +136,6 @@
 
     <changeSet id="202305072224" author="紫穹">
         <comment>项目表添加企业ID字段</comment>
-
         <addColumn tableName="project">
             <column name="company_id" type="int" defaultValue="-1" remarks="企业ID" afterColumn="id">
                 <constraints nullable="false"/>
@@ -148,6 +146,15 @@
     <changeSet id="202305081359" author="紫穹">
         <comment>项目表封面图片字段长度修改为128</comment>
         <modifyDataType tableName="project" columnName="cover_image" newDataType="varchar(128)" />
+    </changeSet>
+
+    <changeSet id="202305090732" author="紫穹">
+        <comment>用户表添加头像字段</comment>
+        <addColumn tableName="user">
+            <column name="avatar" type="varchar(128)" defaultValue="" remarks="用户头像" afterColumn="password">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
     </changeSet>
 
 </databaseChangeLog>
