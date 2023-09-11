@@ -22,7 +22,7 @@ public class ProjectTask {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    /** 任务ID */
+    /** 看板ID */
     @TableField("kanban_id")
     private Integer kanbanId;
 

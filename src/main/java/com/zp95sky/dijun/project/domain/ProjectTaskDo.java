@@ -1,6 +1,7 @@
 package com.zp95sky.dijun.project.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zp95sky.dijun.project.enums.ProjectTaskPriorityEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -8,10 +9,10 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@ApiModel(value = "ProjectTaskListDo", description = "项目列表信息")
+@ApiModel(value = "ProjectTaskDo", description = "任务详情信息")
 @Data
 @Builder
-public class ProjectTaskListDo {
+public class ProjectTaskDo {
 
     @ApiModelProperty(value = "任务ID", required = true)
     private Integer id;
@@ -19,12 +20,19 @@ public class ProjectTaskListDo {
     @ApiModelProperty(value = "任务名称", required = true)
     private String name;
 
-    @ApiModelProperty(value = "任务执行者", required = true)
-    private TaskExecutor executor;
+    @ApiModelProperty("任务开始时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime startTime;
 
-    @ApiModelProperty(value = "任务结束时间", required = true)
+    @ApiModelProperty("任务结束时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime endTime;
+
+    @ApiModelProperty(value = "任务优先级", required = true)
+    private ProjectTaskPriorityEnum priority;
+
+    @ApiModelProperty("任务执行者")
+    private TaskExecutor executor;
 
     @ApiModel(value = "TaskExecutor", description = "项目任务执行者")
     @Data

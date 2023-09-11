@@ -1,6 +1,7 @@
 package com.zp95sky.dijun.project.biz;
 
 import com.zp95sky.dijun.common.response.BasePageData;
+import com.zp95sky.dijun.project.domain.ProjectTaskDo;
 import com.zp95sky.dijun.project.domain.ProjectTaskListDo;
 
 /**
@@ -16,5 +17,12 @@ public interface ProjectTaskBiz {
      * @return 任务列表及分页信息
      */
     BasePageData<ProjectTaskListDo> getTaskList(Integer kanbanId, Integer page, Integer pageSize);
+
+    /**
+     * 查询任务详情
+     * @param taskId 任务ID
+     * @return 任务详情
+     */
+    ProjectTaskDo getTaskDetail(Integer taskId);
 
 }

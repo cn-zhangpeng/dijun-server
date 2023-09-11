@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zp95sky.dijun.common.response.BasePageData;
 import com.zp95sky.dijun.project.biz.ProjectTaskBiz;
+import com.zp95sky.dijun.project.domain.ProjectTaskDo;
 import com.zp95sky.dijun.project.domain.ProjectTaskListDo;
 import com.zp95sky.dijun.project.entity.ProjectTask;
 import com.zp95sky.dijun.project.service.ProjectTaskService;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -43,6 +45,29 @@ public class ProjectTaskBizImpl implements ProjectTaskBiz {
         List<ProjectTaskListDo> taskListDos = taskList.stream().map(this::buildProjectTaskListDo).collect(Collectors.toList());
         appendExecutorName(taskListDos);
         return BasePageData.buildData(page, pageSize, taskPage.getTotal(), taskListDos);
+    }
+
+    @Override
+    public ProjectTaskDo getTaskDetail(Integer taskId) {
+        ProjectTask task = taskService.getById(taskId);
+        if (ObjectUtils.isEmpty(task)) {
+            return null;
+        }
+
+        return buildProjectTaskDo(task);
+    }
+
+    private ProjectTaskDo buildProjectTaskDo(ProjectTask task) {
+        ProjectTaskDo taskDo = ProjectTaskDo.builder()
+                .id(task.getId()).name(task.getName()).priority(task.getPriority())
+                .startTime(task.getStartTime()).endTime(task.getEndTime())
+                .build();
+
+        User user = userService.getById(task.getExecutorId());
+        taskDo.setExecutor(ProjectTaskDo.TaskExecutor.builder()
+                .id(user.getId()).name(user.getNickname())
+                .build());
+        return taskDo;
     }
 
     private void appendExecutorName(List<ProjectTaskListDo> taskListDos) {
