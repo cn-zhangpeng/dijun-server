@@ -28,6 +28,9 @@ public class ProjectTaskDo {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime endTime;
 
+    @ApiModelProperty("人物状态，true：已完成，false：未完成")
+    private Boolean status;
+
     @ApiModelProperty(value = "任务优先级", required = true)
     private ProjectTaskPriorityEnum priority;
 

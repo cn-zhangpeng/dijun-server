@@ -33,7 +33,7 @@ public class AuthBizImpl implements AuthBiz {
     private final ObjectMapper objectMapper;
 
     // token失效时间，单位（分钟）
-    private static final long TOKEN_EXPIRE_TIME = 60;
+    private static final long TOKEN_EXPIRE_TIME = 1440;
 
     @SneakyThrows
     @Override

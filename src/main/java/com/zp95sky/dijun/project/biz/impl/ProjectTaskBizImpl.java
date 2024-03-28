@@ -60,6 +60,7 @@ public class ProjectTaskBizImpl implements ProjectTaskBiz {
     private ProjectTaskDo buildProjectTaskDo(ProjectTask task) {
         ProjectTaskDo taskDo = ProjectTaskDo.builder()
                 .id(task.getId()).name(task.getName()).priority(task.getPriority())
+                .status(task.getStatus())
                 .startTime(task.getStartTime()).endTime(task.getEndTime())
                 .build();
 
@@ -82,6 +83,7 @@ public class ProjectTaskBizImpl implements ProjectTaskBiz {
                 .id(projectTask.getExecutorId()).build();
         return ProjectTaskListDo.builder()
                 .id(projectTask.getId()).name(projectTask.getName())
+                .status(projectTask.getStatus())
                 .executor(taskExecutor).endTime(projectTask.getEndTime())
                 .build();
     }

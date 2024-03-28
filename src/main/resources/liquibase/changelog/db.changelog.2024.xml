@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="202305090732" author="紫穹">
+        <comment>任务表添加状态、完成时间字段</comment>
+        <addColumn tableName="project_task">
+            <column name="status" type="tinyint(1)" defaultValue="0" remarks="任务状态，1：已完成，0：未完成" afterColumn="end_time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="complete_time" type="datetime" remarks="任务完成时间" afterColumn="end_time" />
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

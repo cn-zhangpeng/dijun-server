@@ -38,6 +38,14 @@ public class ProjectTask {
     @TableField("end_time")
     private LocalDateTime endTime;
 
+    /** 任务状态，true：已完成，false：未完成 */
+    @TableField("status")
+    private Boolean status;
+
+    /** 任务完成时间 */
+    @TableField("complete_time")
+    private LocalDateTime completeTime;
+
     /** 任务优先级 */
     @TableField("priority")
     private ProjectTaskPriorityEnum priority;
